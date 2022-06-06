@@ -10,7 +10,7 @@ import ru.saakian.dailyexchangerateanalyzer.feign.dto.CurrencyRateDto;
 
 import java.time.LocalDate;
 
-@FeignClient(value = "openexchangerates-api", url = "https://openexchangerates.org/api/")
+@FeignClient(value = "openexchangerates-api", url = "${exchange-rates.api.url}")
 public interface ExchangeRatesFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/historical/{date}.json")

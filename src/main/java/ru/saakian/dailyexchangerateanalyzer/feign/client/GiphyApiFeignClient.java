@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.saakian.dailyexchangerateanalyzer.feign.dto.GifDto;
 
-@FeignClient(value = "giphy-api", url = "https://api.giphy.com/")
+@FeignClient(value = "giphy-api", url = "${giphy.api.url}")
 public interface GiphyApiFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/v1/gifs/random?rating=g")
+    @RequestMapping(method = RequestMethod.GET)
     GifDto randomGif(@RequestParam("api_key") String apiKey,
-                     @RequestParam() String tag);
+                     @RequestParam String tag);
 }

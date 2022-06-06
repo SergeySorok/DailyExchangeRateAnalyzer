@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ExchangeRatesService {
+public class StockGifService {
     private final ProfitService profitService;
-    private final GifGenerationService gifGenerationService;
+    private final GifLoaderService gifLoaderService;
 
-    public ResponseEntity<byte[]> executor(String symbol) {
-        boolean profit = profitService.isProfit(symbol);
-        return gifGenerationService.getActualGif(profit);
+    public ResponseEntity<byte[]> getFunnyGif(String currency) {
+        boolean profit = profitService.isProfit(currency);
+        return gifLoaderService.getActualGif(profit);
     }
 
 }

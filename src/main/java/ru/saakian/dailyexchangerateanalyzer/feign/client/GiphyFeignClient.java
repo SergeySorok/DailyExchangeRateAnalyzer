@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "giphy", url = "https://i.giphy.com/")
+@FeignClient(value = "giphy", url = "${giphy.url}")
 public interface GiphyFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}.gif")

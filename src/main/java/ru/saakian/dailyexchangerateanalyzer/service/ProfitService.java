@@ -2,6 +2,7 @@ package ru.saakian.dailyexchangerateanalyzer.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.saakian.dailyexchangerateanalyzer.feign.client.ExchangeRatesFeignClient;
 import ru.saakian.dailyexchangerateanalyzer.feign.dto.CurrencyRateDto;
@@ -13,14 +14,21 @@ import java.time.LocalDate;
 public class ProfitService {
     private final ExchangeRatesFeignClient client;
 
-    public boolean isProfit(String symbol) {
-        CurrencyRateDto currencyRateDtoToday = client.latestRates("appId", "base", symbol);
-        CurrencyRateDto currencyRateDtoYesterday = client.historicalRates("appId", symbol, "base", LocalDate.now().minusDays(1));
+    @Value("${exchange-rates.app-id}")
+    private String appId;
+    @Value("${exchange-rates.base-currency}")
+    private String baseCurrency;
 
-        return isExchangeRateProfit(symbol, currencyRateDtoToday, currencyRateDtoYesterday);
+    public boolean isProfit(String currency) {
+        CurrencyRateDto currencyRateDtoToday = client.latestRates(appId, baseCurrency, currency);
+        CurrencyRateDto currencyRateDtoYesterday = client.historicalRates(appId, currency, baseCurrency, LocalDate.now().minusDays(1));
+
+        return isExchangeRateProfitable(currency, currencyRateDtoToday, currencyRateDtoYesterday);
     }
 
-    private boolean isExchangeRateProfit(String currency, CurrencyRateDto currencyRateDtoToday, CurrencyRateDto currencyRateDtoYesterday) {
+    private boolean isExchangeRateProfitable(String currency,
+                                             CurrencyRateDto currencyRateDtoToday,
+                                             CurrencyRateDto currencyRateDtoYesterday) {
         Double currencyToday = currencyRateDtoToday.getRate(currency);
         Double currencyYesterday = currencyRateDtoYesterday.getRate(currency);
 

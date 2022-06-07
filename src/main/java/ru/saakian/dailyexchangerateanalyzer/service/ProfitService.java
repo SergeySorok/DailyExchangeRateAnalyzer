@@ -35,5 +35,3 @@ public class ProfitService {
         return currencyToday > currencyYesterday;
     }
 }
-
-//1. Проверить что вызываются клиенты (23-24 строки), 2. СОздать 2 DTO в котором карренси будет больше (вернет нужный булеан)

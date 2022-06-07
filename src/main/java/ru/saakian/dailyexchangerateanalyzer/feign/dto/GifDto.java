@@ -17,7 +17,7 @@ public class GifDto {
     @Getter
     @Setter
     @NoArgsConstructor
-    private static class Data {
+    public static class Data {
         private String id;
     }
 }

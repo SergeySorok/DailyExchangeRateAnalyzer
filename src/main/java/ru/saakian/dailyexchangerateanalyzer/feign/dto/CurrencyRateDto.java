@@ -2,6 +2,7 @@ package ru.saakian.dailyexchangerateanalyzer.feign.dto;
 
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
@@ -12,4 +13,5 @@ public class CurrencyRateDto {
     public Double getRate(String currency) {
         return rates.get(currency);
     }
+
 }

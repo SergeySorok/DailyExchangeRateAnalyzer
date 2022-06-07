@@ -22,12 +22,11 @@ class GifLoaderServiceTest {
     @MockBean
     private GiphyFeignClient giphyFeignClient;
 
-    private final GifDto gifDto = new GifDto();
-
-
     @Test
-    void getActualGif() {
+    void getActualGif_callsService() {
+        GifDto gifDto = new GifDto();
         gifDto.setData(new GifDto.Data());
+
         Mockito.when(giphyApiFeignClient.randomGif(any(), any())).thenReturn(gifDto);
         Mockito.when(giphyFeignClient.gifById(any())).thenReturn(ResponseEntity.ok(new byte[0]));
 

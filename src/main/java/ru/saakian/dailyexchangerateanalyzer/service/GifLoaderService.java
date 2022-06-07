@@ -31,4 +31,3 @@ public class GifLoaderService {
     }
 }
 
-//1. Проверить что вызван gifClient, 2. Вызван giphyFeignClient,

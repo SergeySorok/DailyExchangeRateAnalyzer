@@ -30,3 +30,5 @@ public class GifLoaderService {
         return giphyFeignClient.gifById(gifDto.getGifId());
     }
 }
+
+//1. Проверить что вызван gifClient, 2. Вызван giphyFeignClient,
